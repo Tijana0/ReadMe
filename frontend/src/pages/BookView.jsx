@@ -326,8 +326,11 @@ const BookView = () => {
                                     ({averageRating.toFixed(1)} - {reviewCount} reviews)
                                 </div>
                             )}
-                                              <div className="book-detail-reviews-section">
-                            <h2 className="book-detail-reviews-title">Reviews</h2>
+                        </div>
+                    </div>
+
+                    <div className="book-detail-reviews-section">
+                        <h2 className="book-detail-reviews-title">Reviews</h2>
 
                             <div className="book-detail-reviews-list">
                                 {reviews.length > 0 ? (
