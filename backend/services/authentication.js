@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const ACCESS_TOKEN_SECRET =
+    process.env.ACCESS_TOKEN_SECRET ||
     "[REDACTED]"
 const JWT_EXPIRES_IN = "24h"
 

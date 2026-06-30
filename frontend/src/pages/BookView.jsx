@@ -33,7 +33,7 @@ const BookView = () => {
             console.log("Book ID:", bookId)
 
             const token = localStorage.getItem("token")
-            const response = await axios.get(`http://localhost:3001/api/books/${bookId}`, {
+            const response = await axios.get(`/api/books/${bookId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -51,7 +51,7 @@ const BookView = () => {
         try {
             console.log("=== FETCHING REVIEWS START ===")
             const token = localStorage.getItem("token")
-            const response = await axios.get(`http://localhost:3001/api/reviews/book/${bookId}`, {
+            const response = await axios.get(`/api/reviews/book/${bookId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -77,7 +77,7 @@ const BookView = () => {
         try {
             console.log("=== FETCHING RATING START ===")
             const token = localStorage.getItem("token")
-            const response = await axios.get(`http://localhost:3001/api/reviews/book/${bookId}/rating`, {
+            const response = await axios.get(`/api/reviews/book/${bookId}/rating`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -115,7 +115,7 @@ const BookView = () => {
 
             const token = localStorage.getItem("token")
             const response = await axios.post(
-                "http://localhost:3001/api/reviews",
+                "/api/reviews",
                 {
                     bookId: Number.parseInt(bookId),
                     rating: newRating,

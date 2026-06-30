@@ -20,7 +20,7 @@ const Library = () => {
         const fetchBooks = async () => {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.get("http://localhost:3001/api/books", {
+                const response = await axios.get("/api/books", {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 setBooks(response.data) // Adjust if your backend returns { books: [...] }

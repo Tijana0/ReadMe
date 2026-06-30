@@ -42,7 +42,7 @@ export default function AddBookModal({ open, onClose, onBookAdded }) {
     try {
       console.log("Searching for books:", bookTitle.trim())
 
-      const response = await axios.get("http://localhost:3001/api/books/search", {
+      const response = await axios.get("/api/books/search", {
         params: { q: bookTitle.trim() },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -167,7 +167,7 @@ export default function AddBookModal({ open, onClose, onBookAdded }) {
 
       console.log("Sending book data:", bookData)
 
-      const response = await axios.post("http://localhost:3001/api/books", bookData, {
+      const response = await axios.post("/api/books", bookData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

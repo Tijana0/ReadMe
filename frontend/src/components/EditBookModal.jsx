@@ -53,7 +53,7 @@ export default function EditBookModal({ open, onClose, book, onBookUpdated }) {
         setSuccessMessage("")
 
         try {
-            const response = await axios.put(`http://localhost:3001/api/books/${book.id}`, formData, {
+            const response = await axios.put(`/api/books/${book.id}`, formData, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 

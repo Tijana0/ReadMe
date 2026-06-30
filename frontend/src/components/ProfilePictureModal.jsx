@@ -61,7 +61,7 @@ const ProfilePictureModal = ({ open, onClose, currentProfilePicture, onProfilePi
 
         try {
             const response = await axios.patch(
-                "http://localhost:3001/api/users/profile",
+                "/api/users/profile",
                 { profilePicture: selectedPicture },
                 {
                     headers: { Authorization: `Bearer ${token}` },

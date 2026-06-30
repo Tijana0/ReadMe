@@ -39,7 +39,7 @@ const Dashboard = () => {
             setMyBooksError(null)
 
             const token = localStorage.getItem("token")
-            const response = await axios.get("http://localhost:3001/api/books", {
+            const response = await axios.get("/api/books", {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -57,7 +57,7 @@ const Dashboard = () => {
     const fetchFavoriteBooks = async () => {
         try {
             const token = localStorage.getItem("token")
-            const response = await axios.get("http://localhost:3001/api/books", {
+            const response = await axios.get("/api/books", {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -75,7 +75,7 @@ const Dashboard = () => {
             try {
                 console.log("Fetching user profile...")
                 const token = localStorage.getItem("token")
-                const response = await axios.get("http://localhost:3001/api/users/profile", {
+                const response = await axios.get("/api/users/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 console.log("User profile response:", response.data)
@@ -94,7 +94,7 @@ const Dashboard = () => {
         const fetchCurrentlyReading = async () => {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.get("http://localhost:3001/api/books/status/Currently Reading", {
+                const response = await axios.get("/api/books/status/Currently Reading", {
                     headers: { Authorization: `Bearer ${token}` },
                 })
                 if (response.data && response.data.length > 0) {
@@ -156,7 +156,7 @@ const Dashboard = () => {
         try {
             const token = localStorage.getItem("token")
             await axios.patch(
-                "http://localhost:3001/api/users/profile",
+                "/api/users/profile",
                 { description: descInput },
                 { headers: { Authorization: `Bearer ${token}` } },
             )

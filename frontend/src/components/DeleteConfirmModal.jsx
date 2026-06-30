@@ -27,7 +27,7 @@ export default function DeleteConfirmModal({ open, onClose, book, onBookDeleted 
         setError(null)
 
         try {
-            const response = await axios.delete(`http://localhost:3001/api/books/${book.id}`, {
+            const response = await axios.delete(`/api/books/${book.id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 

@@ -33,7 +33,7 @@ export default function ManageFavoritesModal({ open, onClose, onFavoritesUpdated
     const fetchCurrentFavorites = async () => {
         try {
             setIsLoading(true)
-            const response = await axios.get("http://localhost:3001/api/books", {
+            const response = await axios.get("/api/books", {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -58,7 +58,7 @@ export default function ManageFavoritesModal({ open, onClose, onFavoritesUpdated
 
         try {
             // Search only in user's library (local books)
-            const response = await axios.get("http://localhost:3001/api/books", {
+            const response = await axios.get("/api/books", {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -87,7 +87,7 @@ export default function ManageFavoritesModal({ open, onClose, onFavoritesUpdated
         }
 
         try {
-            await axios.patch(`http://localhost:3001/api/books/${book.id}/favorite`, {}, {
+            await axios.patch(`/api/books/${book.id}/favorite`, {}, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
@@ -107,7 +107,7 @@ export default function ManageFavoritesModal({ open, onClose, onFavoritesUpdated
 
     const handleRemoveFromFavorites = async (book) => {
         try {
-            await axios.patch(`http://localhost:3001/api/books/${book.id}/favorite`, {}, {
+            await axios.patch(`/api/books/${book.id}/favorite`, {}, {
                 headers: { Authorization: `Bearer ${token}` },
             })
 
