@@ -149,7 +149,15 @@ export default function FocusModeModal({ open, onClose, onOpen }) {
         <>
             {/* Main Modal Overlay */}
             {open && (
-                <div className="focus-modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1000 }}>
+                <div 
+                    className="focus-modal-overlay" 
+                    style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1000 }}
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                            onClose();
+                        }
+                    }}
+                >
                     <div className="focus-modal">
                         <button className="focus-modal-close" onClick={onClose}>×</button>
                         <h2>FOCUS MODE</h2>
