@@ -196,6 +196,47 @@ class Review {
             throw error
         }
     }
+
+    static async findByGoogleId(googleId) {
+        try {
+            console.log("=== REVIEW FIND BY GOOGLE ID START ===")
+            console.log("Google ID:", googleId)
+
+            const query = `
+                SELECT r.*, u.email, u.name
+                FROM reviews r
+                LEFT JOIN readers u ON r.user_id = u.id
+                JOIN books b ON r.book_id = b.id
+                WHERE b.google_id = ?
+                ORDER BY r.created_at DESC
+            `
+            const results = await executeQuery(query, [googleId])
+            console.log("Reviews found:", results.length)
+            return results
+        } catch (error) {
+            console.error("Error in Review.findByGoogleId:", error)
+            throw error
+        }
+    }
+
+    static async getAverageRatingByGoogleId(googleId) {
+        try {
+            const query = `
+                SELECT AVG(r.rating) as average_rating, COUNT(*) as review_count
+                FROM reviews r
+                JOIN books b ON r.book_id = b.id
+                WHERE b.google_id = ?
+            `
+            const results = await executeQuery(query, [googleId])
+            return {
+                average_rating: results[0].average_rating ? Number.parseFloat(results[0].average_rating) : 0,
+                review_count: Number.parseInt(results[0].review_count) || 0,
+            }
+        } catch (error) {
+            console.error("Error in Review.getAverageRatingByGoogleId:", error)
+            throw error
+        }
+    }
 }
 
 module.exports = Review

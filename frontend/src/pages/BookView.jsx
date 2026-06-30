@@ -7,7 +7,7 @@ import LightNavMenu from "../components/LightNavMenu"
 import axios from "axios"
 
 const BookView = () => {
-    const { bookId } = useParams()
+    const { bookId, googleId } = useParams()
     const navigate = useNavigate()
     const [book, setBook] = useState(null)
     const [reviews, setReviews] = useState([])
@@ -20,13 +20,83 @@ const BookView = () => {
     const [averageRating, setAverageRating] = useState(0)
     const [reviewCount, setReviewCount] = useState(0)
 
+    const isGoogleBook = !!googleId
+    const [isAddingToLibrary, setIsAddingToLibrary] = useState(false)
+
     useEffect(() => {
-        if (bookId) {
+        if (isGoogleBook) {
+            fetchGoogleBook()
+            fetchGoogleBookReviews()
+            fetchGoogleBookRating()
+        } else {
             fetchBook()
             fetchReviews()
             fetchBookRating()
         }
-    }, [bookId])
+    }, [bookId, googleId])
+
+    const fetchGoogleBook = async () => {
+        try {
+            console.log("=== FETCHING GOOGLE BOOK DETAILS START ===")
+            const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${googleId}`)
+            const info = response.data.volumeInfo
+            setBook({
+                google_id: googleId,
+                title: info.title || "Untitled",
+                author: info.authors?.join(", ") || "Unknown Author",
+                cover_url: info.imageLinks?.thumbnail || "/placeholder.svg",
+                description: info.description || "No description available.",
+                genre: info.categories && info.categories.length > 0 ? info.categories[0] : "No genres listed",
+                status: "Not in Library",
+                page_count: info.pageCount || null,
+                published_date: info.publishedDate || null,
+            })
+            console.log("=== FETCHING GOOGLE BOOK DETAILS SUCCESS ===")
+        } catch (error) {
+            console.error("Failed to fetch Google book details:", error)
+            setBook(null)
+        }
+    }
+
+    const fetchGoogleBookReviews = async () => {
+        try {
+            console.log("=== FETCHING GOOGLE REVIEWS START ===")
+            const token = localStorage.getItem("token")
+            const response = await axios.get(`/api/reviews/google/${googleId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            const transformedReviews = response.data.map((review) => ({
+                id: review.id,
+                user: review.name || review.email || review.username || "Anonymous",
+                userId: review.user_id,
+                comment: review.comment,
+                rating: review.rating,
+                created_at: review.created_at,
+            }))
+            setReviews(transformedReviews)
+            console.log("=== FETCHING GOOGLE REVIEWS SUCCESS ===")
+        } catch (error) {
+            console.error("Failed to fetch Google reviews:", error)
+            setReviews([])
+        }
+    }
+
+    const fetchGoogleBookRating = async () => {
+        try {
+            console.log("=== FETCHING GOOGLE RATING START ===")
+            const token = localStorage.getItem("token")
+            const response = await axios.get(`/api/reviews/google/${googleId}/rating`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setAverageRating(response.data.average_rating || 0)
+            setReviewCount(response.data.review_count || 0)
+            console.log("=== FETCHING GOOGLE RATING SUCCESS ===")
+        } catch (error) {
+            console.error("Failed to fetch Google rating:", error)
+            setAverageRating(0)
+            setReviewCount(0)
+        }
+    }
 
     const fetchBook = async () => {
         try {
@@ -90,6 +160,41 @@ const BookView = () => {
         } catch (error) {
             console.error("=== FETCHING RATING ERROR ===")
             console.error("Failed to fetch rating:", error)
+        }
+    }
+
+    const handleAddToLibrary = async () => {
+        if (!book) return
+        setIsAddingToLibrary(true)
+        try {
+            const token = localStorage.getItem("token")
+            const bookData = {
+                google_id: book.google_id,
+                title: book.title,
+                author: book.author,
+                cover_url: book.cover_url !== "/placeholder.svg" ? book.cover_url : null,
+                status: "Want to Read",
+                description: book.description,
+                page_count: book.page_count,
+                published_date: book.published_date,
+                format: "Physical",
+                genre: book.genre !== "No genres listed" ? book.genre : null,
+            }
+
+            const response = await axios.post("/api/books", bookData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            })
+
+            alert("Book added to your library!")
+            navigate(`/view-book/${response.data.book.id}`)
+        } catch (error) {
+            console.error("Failed to add book to library:", error)
+            alert(error.response?.data?.error || "Failed to add book. Please try again.")
+        } finally {
+            setIsAddingToLibrary(false)
         }
     }
 
@@ -286,7 +391,18 @@ const BookView = () => {
                         <div className="book-detail-section">
                             <h2 className="book-detail-section-title">Status</h2>
                             <div className="book-detail-status">
-                                <span className="book-detail-status-badge">{book.status}</span>
+                                {isGoogleBook ? (
+                                    <button 
+                                        className="book-detail-update-btn"
+                                        onClick={handleAddToLibrary}
+                                        disabled={isAddingToLibrary}
+                                        style={{ backgroundColor: "#d79a1b", border: "none", color: "#feffee" }}
+                                    >
+                                        {isAddingToLibrary ? "Adding..." : "Add to My Library"}
+                                    </button>
+                                ) : (
+                                    <span className="book-detail-status-badge">{book.status}</span>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -396,62 +512,70 @@ const BookView = () => {
                                 )}
                             </div>
 
-                            {reviews.length > 2 && (
+                             {reviews.length > 2 && (
                                 <button className="book-detail-see-more" onClick={() => setShowAllReviews(!showAllReviews)}>
                                     {showAllReviews ? "See Less" : "+ See More"}
                                 </button>
                             )}
 
-                            <div className="book-detail-add-review">
-                                <div style={{ marginBottom: "12px" }}>
-                                    <label
-                                        style={{
-                                            display: "block",
-                                            marginBottom: "6px",
-                                            fontWeight: "bold",
-                                            color: "#FEFFEE",
-                                            fontSize: "0.9em",
-                                        }}
-                                    >
-                                        {editingReviewId ? "Edit Your Rating:" : "Your Rating:"}
-                                    </label>
-                                    <div className="book-detail-rating">{renderInteractiveStars(newRating, setNewRating)}</div>
+                            {isGoogleBook ? (
+                                <div className="book-detail-add-review" style={{ textAlign: "center", padding: "20px", opacity: 0.8 }}>
+                                    <p style={{ color: "#feffee", fontStyle: "italic", fontSize: "0.95em" }}>
+                                        Add this book to your library to write a review!
+                                    </p>
                                 </div>
- 
-                                <textarea
-                                    className="book-detail-review-input"
-                                    placeholder={editingReviewId ? "Edit Your Review..." : "Add Your Review..."}
-                                    value={newReview}
-                                    onChange={(e) => setNewReview(e.target.value)}
-                                    rows={4}
-                                    disabled={isSubmittingReview}
-                                />
-                                <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-                                    <button 
-                                        className="book-detail-submit-review" 
-                                        onClick={handleAddReview} 
-                                        disabled={isSubmittingReview}
-                                        style={{ flex: 1 }}
-                                    >
-                                        {isSubmittingReview ? "Submitting..." : (editingReviewId ? "Update Review" : "Submit Review")}
-                                    </button>
-                                    {editingReviewId && (
-                                        <button 
-                                            className="book-detail-submit-review" 
-                                            onClick={handleCancelEdit} 
-                                            disabled={isSubmittingReview}
-                                            style={{ 
-                                                backgroundColor: "transparent", 
-                                                border: "1px solid #FEFFEE", 
+                            ) : (
+                                <div className="book-detail-add-review">
+                                    <div style={{ marginBottom: "12px" }}>
+                                        <label
+                                            style={{
+                                                display: "block",
+                                                marginBottom: "6px",
+                                                fontWeight: "bold",
                                                 color: "#FEFFEE",
-                                                flex: "0 0 auto"
+                                                fontSize: "0.9em",
                                             }}
                                         >
-                                            Cancel
+                                            {editingReviewId ? "Edit Your Rating:" : "Your Rating:"}
+                                        </label>
+                                        <div className="book-detail-rating">{renderInteractiveStars(newRating, setNewRating)}</div>
+                                    </div>
+     
+                                    <textarea
+                                        className="book-detail-review-input"
+                                        placeholder={editingReviewId ? "Edit Your Review..." : "Add Your Review..."}
+                                        value={newReview}
+                                        onChange={(e) => setNewReview(e.target.value)}
+                                        rows={4}
+                                        disabled={isSubmittingReview}
+                                    />
+                                    <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                                        <button 
+                                            className="book-detail-submit-review" 
+                                            onClick={handleAddReview} 
+                                            disabled={isSubmittingReview}
+                                            style={{ flex: 1 }}
+                                        >
+                                            {isSubmittingReview ? "Submitting..." : (editingReviewId ? "Update Review" : "Submit Review")}
                                         </button>
-                                    )}
+                                        {editingReviewId && (
+                                            <button 
+                                                className="book-detail-submit-review" 
+                                                onClick={handleCancelEdit} 
+                                                disabled={isSubmittingReview}
+                                                style={{ 
+                                                    backgroundColor: "transparent", 
+                                                    border: "1px solid #FEFFEE", 
+                                                    color: "#FEFFEE",
+                                                    flex: "0 0 auto"
+                                                }}
+                                            >
+                                                Cancel
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>

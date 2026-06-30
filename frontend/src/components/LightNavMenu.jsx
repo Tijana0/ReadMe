@@ -35,6 +35,10 @@ const LightNavMenu = ({ showLogo = true }) => {
                 <Link to="/library" className={`nav-link-light ${isActive('library') ? 'active' : ''}`}>
                     My Library
                 </Link>
+                <span className="nav-separator-light">|</span>
+                <Link to="/search" className={`nav-link-light ${isActive('search') ? 'active' : ''}`}>
+                    Search
+                </Link>
                 <button onClick={handleLogout} className="logout-btn-light">
                     Logout
                 </button>
