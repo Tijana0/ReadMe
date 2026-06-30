@@ -60,6 +60,4 @@ app.use((req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"))
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+module.exports = app;
