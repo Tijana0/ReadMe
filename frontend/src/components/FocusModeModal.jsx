@@ -10,7 +10,7 @@ const musicLibrary = [
 export default function FocusModeModal({ open, onClose }) {
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
-    const [selectedMusic, setSelectedMusic] = useState(musicLibrary[0].src);
+    const [selectedTrack, setSelectedTrack] = useState(musicLibrary[0]);
     const audioRef = useRef(null);
     const [volume, setVolume] = useState(0.5);
     const [isActiveMusic, setIsActiveMusic] = useState(false);
@@ -78,16 +78,17 @@ export default function FocusModeModal({ open, onClose }) {
                     <label>
                         <span role="img" aria-label="music">🎵</span> Background Music
                         <select
-                            value={selectedMusic}
+                            value={selectedTrack.label}
                             onChange={e => {
-                                setSelectedMusic(e.target.value);
+                                const track = musicLibrary.find(t => t.label === e.target.value);
+                                setSelectedTrack(track);
                                 if (audioRef.current) {
                                     audioRef.current.load();
                                 }
                             }}
                         >
                             {musicLibrary.map((track) => (
-                                <option key={track.src} value={track.src}>{track.label}</option>
+                                <option key={track.label} value={track.label}>{track.label}</option>
                             ))}
                         </select>
                     </label>
@@ -116,7 +117,7 @@ export default function FocusModeModal({ open, onClose }) {
                             className="volume-slider"
                         />
                         <audio ref={audioRef} loop>
-                            <source src={selectedMusic} type="audio/mp3" />
+                            <source src={selectedTrack.src} type="audio/mp3" />
                             Your browser does not support the audio element.
                         </audio>
                     </div>
