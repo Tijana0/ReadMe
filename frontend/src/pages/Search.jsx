@@ -59,13 +59,14 @@ export default function SearchPage() {
                 <h1 className="search-page-title">Search Books</h1>
                 
                 <form onSubmit={handleSearch} className="search-bar-form">
-                    <div className="search-input-wrapper">
+                    <div className="search-input-wrapper" style={{ border: "none", boxShadow: "none" }}>
                         <input
                             type="text"
                             placeholder="Search by title, author, genre..."
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             className="search-page-input"
+                            style={{ border: "none", outline: "none", boxShadow: "none" }}
                         />
                         <button type="submit" className="search-page-btn" disabled={isSearching}>
                             <SearchIcon size={20} />
