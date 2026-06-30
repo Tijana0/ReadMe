@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const ACCESS_TOKEN_SECRET =
-    process.env.ACCESS_TOKEN_SECRET ||
-    "YOUR_SECRET_HERE"
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+
+if (!ACCESS_TOKEN_SECRET) {
+    throw new Error("ACCESS_TOKEN_SECRET environment variable is required");
+}
+
 const JWT_EXPIRES_IN = "24h"
 
 const generateToken = (payload) => {
