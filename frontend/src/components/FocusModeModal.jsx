@@ -54,6 +54,16 @@ export default function FocusModeModal({ open, onClose }) {
         };
     }, [open]);
 
+    React.useEffect(() => {
+        const audio = audioRef.current;
+        if (audio) {
+            audio.load();
+            if (isActiveMusic) {
+                audio.play().catch((err) => console.error("Audio play failed:", err));
+            }
+        }
+    }, [selectedTrack]);
+
     const formatTime = (s) => {
         const h = String(Math.floor(s / 3600)).padStart(2, "0");
         const m = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
@@ -82,9 +92,6 @@ export default function FocusModeModal({ open, onClose }) {
                             onChange={e => {
                                 const track = musicLibrary.find(t => t.label === e.target.value);
                                 setSelectedTrack(track);
-                                if (audioRef.current) {
-                                    audioRef.current.load();
-                                }
                             }}
                         >
                             {musicLibrary.map((track) => (
