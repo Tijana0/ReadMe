@@ -27,7 +27,7 @@ class Review {
             console.log("=== REVIEW FIND BY BOOK ID START ===")
             console.log("Book ID:", bookId)
 
-            // Fetch the book details to get google_id or title/author
+            // Fetch the book details to get google_id, title, and author
             const bookQuery = "SELECT * FROM books WHERE id = ?"
             const books = await executeQuery(bookQuery, [bookId])
             if (books.length === 0) {
@@ -36,32 +36,21 @@ class Review {
             }
             const book = books[0]
 
-            let query = ""
-            let params = []
-
-            if (book.google_id) {
-                // If it has a google_id, fetch all reviews for books with the same google_id
-                query = `
-                    SELECT r.*, u.email, u.name
-                    FROM reviews r
-                    LEFT JOIN readers u ON r.user_id = u.id
-                    JOIN books b ON r.book_id = b.id
-                    WHERE b.google_id = ?
-                    ORDER BY r.created_at DESC
-                `
-                params = [book.google_id]
-            } else {
-                // If it's a manual book, fetch all reviews for books with the same title and author
-                query = `
-                    SELECT r.*, u.email, u.name
-                    FROM reviews r
-                    LEFT JOIN readers u ON r.user_id = u.id
-                    JOIN books b ON r.book_id = b.id
-                    WHERE LOWER(TRIM(b.title)) = LOWER(TRIM(?)) AND LOWER(TRIM(b.author)) = LOWER(TRIM(?))
-                    ORDER BY r.created_at DESC
-                `
-                params = [book.title, book.author]
-            }
+            // Fetch all reviews that match the google_id (if present) OR the title and author
+            const query = `
+                SELECT r.*, u.email, u.name
+                FROM reviews r
+                LEFT JOIN readers u ON r.user_id = u.id
+                JOIN books b ON r.book_id = b.id
+                WHERE (b.google_id = ? AND b.google_id IS NOT NULL AND b.google_id != '')
+                   OR (LOWER(TRIM(b.title)) = LOWER(TRIM(?)) AND LOWER(TRIM(b.author)) = LOWER(TRIM(?)))
+                ORDER BY r.created_at DESC
+            `
+            const params = [
+                book.google_id || '',
+                book.title,
+                book.author
+            ]
 
             console.log("Executing query:", query)
             const results = await executeQuery(query, params)
@@ -168,7 +157,7 @@ class Review {
             console.log("=== GET AVERAGE RATING START ===")
             console.log("Book ID:", bookId)
 
-            // Fetch the book details to get google_id or title/author
+            // Fetch the book details to get google_id, title, and author
             const bookQuery = "SELECT * FROM books WHERE id = ?"
             const books = await executeQuery(bookQuery, [bookId])
             if (books.length === 0) {
@@ -176,26 +165,18 @@ class Review {
             }
             const book = books[0]
 
-            let query = ""
-            let params = []
-
-            if (book.google_id) {
-                query = `
-                    SELECT AVG(r.rating) as average_rating, COUNT(*) as review_count
-                    FROM reviews r
-                    JOIN books b ON r.book_id = b.id
-                    WHERE b.google_id = ?
-                `
-                params = [book.google_id]
-            } else {
-                query = `
-                    SELECT AVG(r.rating) as average_rating, COUNT(*) as review_count
-                    FROM reviews r
-                    JOIN books b ON r.book_id = b.id
-                    WHERE LOWER(TRIM(b.title)) = LOWER(TRIM(?)) AND LOWER(TRIM(b.author)) = LOWER(TRIM(?))
-                `
-                params = [book.title, book.author]
-            }
+            const query = `
+                SELECT AVG(r.rating) as average_rating, COUNT(*) as review_count
+                FROM reviews r
+                JOIN books b ON r.book_id = b.id
+                WHERE (b.google_id = ? AND b.google_id IS NOT NULL AND b.google_id != '')
+                   OR (LOWER(TRIM(b.title)) = LOWER(TRIM(?)) AND LOWER(TRIM(b.author)) = LOWER(TRIM(?)))
+            `
+            const params = [
+                book.google_id || '',
+                book.title,
+                book.author
+            ]
 
             console.log("Executing rating query:", query)
             const results = await executeQuery(query, params)
