@@ -233,6 +233,11 @@ export default function AddBookModal({ open, onClose, onBookAdded }) {
       <div
           className="focus-modal-overlay"
           style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 1000 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              handleClose();
+            }
+          }}
       >
         <div className="add-book-modal">
           <button className="focus-modal-close" onClick={handleClose}>
