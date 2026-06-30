@@ -1,0 +1,409 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+  "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Common Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Add Book Modal Styles */
+.add-book-modal {
+    background-color: #618274;
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: #f0f0f0;
+}
+
+.add-book-modal h2 {
+    font-size: 1.8rem;
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.add-book-modal .add-book-field label {
+    color: #e0e0e0;
+    font-weight: 400;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.add-book-modal .search-input-wrapper input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid #FEFFEE;
+    border-radius: 0;
+    background-color: transparent;
+    color: #FEFFEE;
+    font-size: 1rem;
+    outline: none;
+}
+
+.add-book-modal .search-input-wrapper input::placeholder {
+    color: rgba(254, 255, 238, 0.7);
+}
+
+.add-book-modal .search-input-wrapper input:focus {
+    border-bottom: 2px solid #FEFFEE;
+}
+
+.add-book-modal .search-icon {
+    color: #e0e0e0;
+}
+
+.add-book-modal .pill-button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 9999px;
+    border: 1px solid #FEFFEE;
+    background-color: transparent;
+    color: #FEFFEE;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.95rem;
+}
+
+.add-book-modal .pill-button.active {
+    background-color: #FEFFEE;
+    color: #617b72;
+}
+
+.add-book-modal .pill-button:hover:not(.active) {
+    background-color: rgba(254, 255, 238, 0.2);
+}
+
+.add-book-modal .log-book-btn {
+    background-color: #FEFFEE;
+    color: #4b6a5a;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    align-self: center;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-book-modal .log-book-btn:hover {
+    background-color: #7a9484;
+}
+
+/* Focus Mode Modal Styles */
+.focus-modal {
+    background-color: #618274;
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: #f0f0f0;
+}
+
+.focus-modal h2 {
+    font-size: 1.8rem;
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.focus-modal .focus-timer {
+    font-size: 3.5rem;
+    color: #fefefe;
+    text-align: center;
+    font-weight: 600;
+}
+
+.focus-modal .focus-controls button {
+    background-color: #FEFFEE;
+    color: #4b6a5a;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.focus-modal .focus-controls button:hover {
+    background-color: #7a9484;
+}
+
+.focus-modal .focus-music label {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.focus-modal .focus-music select {
+    background-color: #FEFFEE;
+    color: #4b6a5a;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.focus-modal .custom-audio-player button {
+    background: none;
+    color: #fefefe;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.focus-modal .volume-slider {
+    width: 170px; 
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #FEFFEE;
+    border-radius: 3px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.focus-modal .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fefefe;
+    cursor: pointer;
+}
+
+.focus-modal .volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fefefe;
+    cursor: pointer;
+}
+
+/* Update Progress Modal Styles */
+.update-progress-modal {
+    background-color: #618274;
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: #f0f0f0;
+}
+
+.update-progress-modal .modal-title {
+    font-size: 1.8rem;
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.update-progress-modal .modal-content {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.update-progress-modal .modal-left {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+.update-progress-modal .modal-book-cover {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.update-progress-modal .modal-left h3 {
+    font-size: 1.3rem;
+    margin-top: 0.75rem;
+    color: #f0f0f0;
+    font-weight: 600;
+}
+
+.update-progress-modal .modal-left p {
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+.update-progress-modal .modal-right {
+    flex: 2;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.update-progress-modal .modal-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+.update-progress-modal .modal-field label {
+    margin-bottom: 8px;
+    font-weight: 400;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+
+.update-progress-modal .modal-field input[type="number"] {
+    padding: 0 0 0.6rem 0;
+    border: none;
+    border-bottom: 1px solid #c0c0c0;
+    background: none;
+    border-radius: 0;
+    font-size: 1.1rem;
+    width: 100%;
+    box-sizing: border-box;
+    color: #fefefe;
+}
+
+.update-progress-modal .modal-info {
+    background-color: #618274;
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin-top: 1.5rem;
+    border: 1px solid #7a9c8b;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.update-progress-modal .modal-info p {
+    margin: 0;
+    color: #f0f0f0;
+    font-size: 1.1rem;
+}
+
+.update-progress-modal .modal-info span {
+    font-weight: bold;
+    color: #fefefe;
+}
+
+.update-progress-modal .confirm-button {
+    background-color: #8da498;
+    color: #4b6a5a;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    align-self: center;
+    margin-top: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.update-progress-modal .confirm-button:hover {
+    background-color: #7a9484;
+}
+
+/* Close button for all modals */
+.focus-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #f0f0f0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .add-book-modal,
+    .focus-modal,
+    .update-progress-modal {
+        padding: 1.5rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .add-book-modal .modal-content,
+    .focus-modal .modal-content,
+    .update-progress-modal .modal-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .add-book-modal .modal-left,
+    .add-book-modal .modal-right,
+    .focus-modal .modal-left,
+    .focus-modal .modal-right,
+    .update-progress-modal .modal-left,
+    .update-progress-modal .modal-right {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .add-book-modal .modal-title,
+    .focus-modal .modal-title,
+    .update-progress-modal .modal-title {
+        font-size: 1.5rem;
+    }
+}
