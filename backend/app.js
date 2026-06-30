@@ -55,9 +55,14 @@ process.on("unhandledRejection", (reason, promise) => {
     console.error("Unhandled Rejection at:", promise, "reason:", reason)
 })
 
-app.use(express.static(path.join(__dirname, "../frontend/dist")))
+const fs = require("fs")
+const distPath = fs.existsSync(path.join(__dirname, "dist"))
+    ? path.join(__dirname, "dist")
+    : path.join(__dirname, "../frontend/dist")
+
+app.use(express.static(distPath))
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"))
+    res.sendFile(path.join(distPath, "index.html"))
 })
 
 module.exports = app;

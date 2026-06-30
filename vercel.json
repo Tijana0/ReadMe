@@ -3,7 +3,7 @@
         "backend": {
             "root": "backend",
             "entrypoint": "server.js",
-            "buildCommand": "cd ../frontend && npm install && npm run build"
+            "buildCommand": "cd ../frontend && npm install && npm run build && cp -r dist ../backend/dist"
         }
     },
     "rewrites": [
