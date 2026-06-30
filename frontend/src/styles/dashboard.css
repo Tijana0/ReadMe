@@ -413,7 +413,7 @@
     padding: 3rem 2rem;
     width: 90vw;
     height: 85vh;
-    max-width: 1200px;
+    max-width: none;
     max-height: 900px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
     position: relative;
@@ -563,7 +563,7 @@
     padding: 3rem 2rem;
     width: 90vw;
     height: 85vh;
-    max-width: 1200px;
+    max-width: none;
     max-height: 900px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
     position: relative;
