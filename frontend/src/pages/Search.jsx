@@ -48,7 +48,9 @@ export default function SearchPage() {
 
     return (
         <div className="search-page-container">
-            <NavMenu />
+            <div style={{ backgroundColor: "#feffee" }}>
+                <NavMenu />
+            </div>
             <div className="search-page-content">
                 <h1 className="search-page-title">Search Books</h1>
                 
