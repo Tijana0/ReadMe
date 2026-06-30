@@ -305,7 +305,7 @@ const BookView = () => {
                             }}
                         />
 
-                        <div className="book-detail-rating">
+                        <div className="book-detail-rating" style={{ flexDirection: "column", alignItems: "center" }}>
                             <div>
                             {[...Array(5)].map((_, index) => (
                                 <span
