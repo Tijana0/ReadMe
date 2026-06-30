@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import "../styles/dashboard.css"
 
 import AddBookModal from "../components/AddBookModal"
-import ProfilePictureModal from "../components/ProfilePictureModal"
+import ProfilePictureModal, { getProfilePicture } from "../components/ProfilePictureModal"
 import NavMenu from "../components/NavMenu"
 import axios from "axios"
 import { FaEdit } from "react-icons/fa"
@@ -81,7 +81,7 @@ const Dashboard = () => {
                 console.log("User profile response:", response.data)
                 setUser(response.data)
                 setDescription(response.data.description || "")
-                setProfilePicture(response.data.profilePicture || defaultProfileImage)
+                setProfilePicture(getProfilePicture(response.data.profilePicture))
                 localStorage.setItem("user", JSON.stringify(response.data))
             } catch (error) {
                 console.error("Failed to fetch user profile:", error)
@@ -172,10 +172,10 @@ const Dashboard = () => {
         }
     }
 
-    const handleProfilePictureUpdated = (newProfilePicture) => {
-        setProfilePicture(newProfilePicture)
+    const handleProfilePictureUpdated = (newProfilePictureId) => {
+        setProfilePicture(getProfilePicture(newProfilePictureId))
         // Update user state
-        const updatedUser = { ...user, profilePicture: newProfilePicture }
+        const updatedUser = { ...user, profilePicture: newProfilePictureId }
         setUser(updatedUser)
     }
 

@@ -11,25 +11,40 @@ import profilePic4 from "../assets/pp-3.jpg"
 import profilePic5 from "../assets/pp-4.jpg"
 import profilePic6 from "../assets/pp-5.jpg"
 
+export const profilePictures = [
+    { id: "1", src: profilePic1, name: "Profile 1" },
+    { id: "2", src: profilePic2, name: "Profile 2" },
+    { id: "3", src: profilePic3, name: "Profile 3" },
+    { id: "4", src: profilePic4, name: "Profile 4" },
+    { id: "5", src: profilePic5, name: "Profile 5" },
+    { id: "6", src: profilePic6, name: "Profile 6" },
+]
+
+export const getProfilePicture = (value) => {
+    const match = profilePictures.find(p => p.id === value || p.src === value);
+    if (match) return match.src;
+    // Handle legacy compiled paths (if the image path was saved directly in the DB)
+    if (value && (value.includes('/') || value.startsWith('data:'))) {
+        return value;
+    }
+    return profilePic1; // Default fallback
+}
+
+export const getProfilePictureId = (value) => {
+    const match = profilePictures.find(p => p.id === value || p.src === value);
+    return match ? match.id : "1";
+}
+
 const ProfilePictureModal = ({ open, onClose, currentProfilePicture, onProfilePictureUpdated }) => {
-    const [selectedPicture, setSelectedPicture] = useState(currentProfilePicture)
+    const [selectedPicture, setSelectedPicture] = useState(getProfilePictureId(currentProfilePicture))
     const [isUpdating, setIsUpdating] = useState(false)
     const [error, setError] = useState(null)
     const [successMessage, setSuccessMessage] = useState("")
 
-    const profilePictures = [
-        { id: 1, src: profilePic1, name: "Profile 1" },
-        { id: 2, src: profilePic2, name: "Profile 2" },
-        { id: 3, src: profilePic3, name: "Profile 3" },
-        { id: 4, src: profilePic4, name: "Profile 4" },
-        { id: 5, src: profilePic5, name: "Profile 5" },
-        { id: 6, src: profilePic6, name: "Profile 6" },
-    ]
-
     useEffect(() => {
         if (open) {
             document.body.style.overflow = "hidden"
-            setSelectedPicture(currentProfilePicture)
+            setSelectedPicture(getProfilePictureId(currentProfilePicture))
             setError(null)
             setSuccessMessage("")
         } else {
@@ -45,7 +60,7 @@ const ProfilePictureModal = ({ open, onClose, currentProfilePicture, onProfilePi
     const token = localStorage.getItem("token")
 
     const handlePictureSelect = (picture) => {
-        setSelectedPicture(picture.src)
+        setSelectedPicture(picture.id)
         setError(null)
     }
 
@@ -96,7 +111,7 @@ const ProfilePictureModal = ({ open, onClose, currentProfilePicture, onProfilePi
     }
 
     const handleClose = () => {
-        setSelectedPicture(currentProfilePicture)
+        setSelectedPicture(getProfilePictureId(currentProfilePicture))
         setError(null)
         setSuccessMessage("")
         onClose()
@@ -170,7 +185,7 @@ const ProfilePictureModal = ({ open, onClose, currentProfilePicture, onProfilePi
                                 cursor: "pointer",
                                 borderRadius: "50%",
                                 overflow: "hidden",
-                                border: selectedPicture === picture.src ? "3px solid #FEFFEE" : "3px solid transparent",
+                                border: selectedPicture === picture.id ? "3px solid #FEFFEE" : "3px solid transparent",
                                 transition: "all 0.2s ease",
                                 aspectRatio: "1",
                             }}
@@ -192,7 +207,7 @@ const ProfilePictureModal = ({ open, onClose, currentProfilePicture, onProfilePi
                                     e.target.style.transform = "scale(1)"
                                 }}
                             />
-                            {selectedPicture === picture.src && (
+                            {selectedPicture === picture.id && (
                                 <div
                                     style={{
                                         position: "absolute",
