@@ -10,6 +10,7 @@ router.use(authenticateToken)
 router.get("/", bookController.getAllBooks)
 router.get("/status/:status", bookController.getBooksByStatus)
 router.get("/search", bookController.searchBooks)
+router.get("/google/:googleId", bookController.getGoogleBookById)
 router.get("/dashboard", bookController.getDashboardData)
 router.get("/:id", bookController.getBookById)
 router.post("/", bookController.addBook) // This should be the add book endpoint

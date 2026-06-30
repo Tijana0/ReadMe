@@ -42,8 +42,12 @@ export default function SearchPage() {
         }
     }
 
-    const handleViewDetails = (googleId) => {
-        navigate(`/book/google/${googleId}`)
+    const handleViewDetails = (book) => {
+        if (book.source === "local") {
+            navigate(`/view-book/${book.id}`)
+        } else {
+            navigate(`/book/google/${book.id}`)
+        }
     }
 
     return (
@@ -76,7 +80,7 @@ export default function SearchPage() {
                 ) : (
                     <div className="search-results-grid">
                         {results.map((book) => (
-                            <div key={book.id} className="search-result-card" onClick={() => handleViewDetails(book.id)}>
+                            <div key={book.id} className="search-result-card" onClick={() => handleViewDetails(book)}>
                                 <img
                                     src={book.thumbnail || "/placeholder.svg"}
                                     alt={book.title}
