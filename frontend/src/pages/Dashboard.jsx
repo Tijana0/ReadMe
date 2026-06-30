@@ -465,7 +465,7 @@ const Dashboard = () => {
             {/* Footer */}
             <footer className="dashboard-footer">Copyright 2025 - All rights reserved</footer>
 
-            <FocusModeModal open={showFocusModal} onClose={() => setShowFocusModal(false)} />
+            <FocusModeModal open={showFocusModal} onClose={() => setShowFocusModal(false)} onOpen={() => setShowFocusModal(true)} />
             <AddBookModal open={showAddBookModal} onClose={() => setShowAddBookModal(false)} onBookAdded={handleBookAdded} />
             <ProfilePictureModal
                 open={showProfilePictureModal}

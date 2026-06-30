@@ -7,7 +7,7 @@ const musicLibrary = [
     { label: "White Noise", src: "/sounds/whitenoise.mp3" }
 ];
 
-export default function FocusModeModal({ open, onClose }) {
+export default function FocusModeModal({ open, onClose, onOpen }) {
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [selectedTrack, setSelectedTrack] = useState(musicLibrary[0]);
@@ -41,8 +41,17 @@ export default function FocusModeModal({ open, onClose }) {
             });
         };
 
-        const handleMouseUp = () => {
+        const handleMouseUp = (e) => {
             setIsDragging(false);
+            
+            // Calculate distance moved
+            const dx = Math.abs(e.clientX - dragStart.current.x);
+            const dy = Math.abs(e.clientY - dragStart.current.y);
+            
+            // If moved less than 5px, treat as click to open main modal
+            if (dx < 5 && dy < 5) {
+                if (onOpen) onOpen();
+            }
         };
 
         window.addEventListener('mousemove', handleMouseMove);
@@ -52,7 +61,7 @@ export default function FocusModeModal({ open, onClose }) {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [isDragging]);
+    }, [isDragging, onOpen]);
 
     const handleWidgetClose = () => {
         setIsActive(false);
