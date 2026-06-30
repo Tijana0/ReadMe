@@ -454,13 +454,12 @@ const BookView = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
             {/* Footer */}
             <footer className="book-detail-footer">Copyright 2025 - All rights reserved</footer>
         </div>
-    )
+    </div>
+)
 }
 
 export default BookView
