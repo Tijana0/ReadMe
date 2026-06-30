@@ -1,20 +1,20 @@
-# ReadMe 📚
+# ReadMe
 
 **ReadMe** is a beautiful, modern web application designed for book lovers to track their reading journeys, manage their personal libraries, and share reviews with a global community of readers.
 
 ---
 
-## 🚀 Features
+## Features
 
-*   **📖 Personal Library**: Add and organize books into categories: *Want to Read*, *Currently Reading*, and *Read*.
-*   **📈 Progress Tracking**: Update your reading progress (pages read) and mark books as completed.
-*   **🌟 Global Reviews & Ratings**: Write, edit, and delete reviews. Reviews are shared globally across all users who have the same book (linked by Google Book ID or Title + Author).
-*   **🔍 Book Search**: Search the Google Books API to discover new titles, view their global ratings/reviews, and add them directly to your library.
-*   **🎨 Premium Aesthetics**: A fully responsive, dark green and cream literary-themed interface with smooth micro-animations and a custom "Lost in the Stacks" 404 page.
+*   **Personal Library**: Add and organize books into categories: *Want to Read*, *Currently Reading*, and *Read*.
+*   **Progress Tracking**: Update your reading progress (pages read) and mark books as completed.
+*   **Global Reviews & Ratings**: Write, edit, and delete reviews. Reviews are shared globally across all users who have the same book (linked by Google Book ID or Title + Author).
+*   **Book Search**: Search the Google Books API to discover new titles, view their global ratings/reviews, and add them directly to your library.
+*   **Premium Aesthetics**: A fully responsive, dark green and cream literary-themed interface with smooth micro-animations and a custom "Lost in the Stacks" 404 page.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 *   **Frontend**: React (Vite), React Router DOM, Axios, Lucide React, Vanilla CSS.
 *   **Backend**: Node.js, Express, MySQL (`mysql2` connection pool).
@@ -22,7 +22,7 @@
 
 ---
 
-## 💻 Getting Started
+## Getting Started
 
 ### Prerequisites
 *   [Node.js](https://nodejs.org/) (v18+ recommended)
@@ -72,7 +72,7 @@ Create a MySQL database and run your schema migrations to set up the `users`, `b
 
 ---
 
-## 🌐 Deployment on Vercel
+## Deployment on Vercel
 
 The project is configured for Vercel using a single-service monorepo deployment defined in the root [vercel.json](vercel.json):
 *   Vercel builds the React frontend and copies the build output into `backend/dist`.
