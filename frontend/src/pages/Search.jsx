@@ -59,7 +59,7 @@ export default function SearchPage() {
                 <h1 className="search-page-title">Search Books</h1>
                 
                 <form onSubmit={handleSearch} className="search-bar-form">
-                    <div className="search-input-wrapper" style={{ border: "none", boxShadow: "none" }}>
+                    <div className="search-input-wrapper" style={{ border: "none", boxShadow: "none", padding: "4px 4px 4px 20px" }}>
                         <input
                             type="text"
                             placeholder="Search by title, author, genre..."
