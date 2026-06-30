@@ -38,19 +38,11 @@ const BookView = () => {
     const fetchGoogleBook = async () => {
         try {
             console.log("=== FETCHING GOOGLE BOOK DETAILS START ===")
-            const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${googleId}`)
-            const info = response.data.volumeInfo
-            setBook({
-                google_id: googleId,
-                title: info.title || "Untitled",
-                author: info.authors?.join(", ") || "Unknown Author",
-                cover_url: info.imageLinks?.thumbnail || "/placeholder.svg",
-                description: info.description || "No description available.",
-                genre: info.categories && info.categories.length > 0 ? info.categories[0] : "No genres listed",
-                status: "Not in Library",
-                page_count: info.pageCount || null,
-                published_date: info.publishedDate || null,
+            const token = localStorage.getItem("token")
+            const response = await axios.get(`/api/books/google/${googleId}`, {
+                headers: { Authorization: `Bearer ${token}` },
             })
+            setBook(response.data)
             console.log("=== FETCHING GOOGLE BOOK DETAILS SUCCESS ===")
         } catch (error) {
             console.error("Failed to fetch Google book details:", error)

@@ -511,6 +511,43 @@ const searchBooks = async (req, res) => {
     }
 }
 
+const getGoogleBookById = async (req, res) => {
+    try {
+        const { googleId } = req.params
+        console.log("Fetching Google Book details from API for ID:", googleId)
+        
+        const url = `${GOOGLE_BOOKS_API_URL}/${googleId}`
+        const params = {}
+        if (GOOGLE_BOOKS_API_KEY) {
+            params.key = GOOGLE_BOOKS_API_KEY
+        }
+        
+        const response = await axios.get(url, { params })
+        const item = response.data
+        const volumeInfo = item.volumeInfo || {}
+        const imageLinks = volumeInfo.imageLinks || {}
+        
+        const bookData = {
+            google_id: item.id,
+            title: volumeInfo.title || "Unknown Title",
+            author: Array.isArray(volumeInfo.authors)
+                ? volumeInfo.authors.join(", ")
+                : volumeInfo.authors || "Unknown Author",
+            cover_url: imageLinks.thumbnail || imageLinks.smallThumbnail || null,
+            description: volumeInfo.description || "No description available",
+            genre: volumeInfo.categories && volumeInfo.categories.length > 0 ? volumeInfo.categories[0] : null,
+            status: "Not in Library",
+            page_count: volumeInfo.pageCount || null,
+            published_date: volumeInfo.publishedDate || null,
+        }
+        
+        res.json(bookData)
+    } catch (error) {
+        console.error("Error fetching Google Book by ID:", error)
+        res.status(500).json({ error: "Failed to fetch Google Book details" })
+    }
+}
+
 module.exports = {
     getAllBooks,
     getBooksByStatus,
@@ -521,4 +558,5 @@ module.exports = {
     deleteBook,
     getDashboardData,
     searchBooks,
+    getGoogleBookById,
 }
