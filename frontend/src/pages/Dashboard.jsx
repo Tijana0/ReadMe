@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/dashboard.css"
-import FocusModeModal from "../components/FocusModeModal"
+
 import AddBookModal from "../components/AddBookModal"
 import ProfilePictureModal from "../components/ProfilePictureModal"
 import NavMenu from "../components/NavMenu"
@@ -18,7 +18,7 @@ import chartImage from "../assets/chart.jpeg"
 const Dashboard = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState(null)
-    const [showFocusModal, setShowFocusModal] = useState(false)
+
     const [showAddBookModal, setShowAddBookModal] = useState(false)
     const [showProfilePictureModal, setShowProfilePictureModal] = useState(false)
     const [editingDescription, setEditingDescription] = useState(false)
@@ -412,7 +412,7 @@ const Dashboard = () => {
                                 <span>♡</span>
                                 <span>Manage Favorites</span>
                             </button>
-                            <button className="action-btn" onClick={() => setShowFocusModal(true)}>
+                            <button className="action-btn" onClick={() => window.dispatchEvent(new CustomEvent('open-focus-modal'))}>
                                 <span>⏱</span>
                                 <span>Focused Reading</span>
                             </button>
@@ -465,7 +465,7 @@ const Dashboard = () => {
             {/* Footer */}
             <footer className="dashboard-footer">Copyright 2025 - All rights reserved</footer>
 
-            <FocusModeModal open={showFocusModal} onClose={() => setShowFocusModal(false)} onOpen={() => setShowFocusModal(true)} />
+
             <AddBookModal open={showAddBookModal} onClose={() => setShowAddBookModal(false)} onBookAdded={handleBookAdded} />
             <ProfilePictureModal
                 open={showProfilePictureModal}

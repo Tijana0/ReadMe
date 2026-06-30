@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 const musicLibrary = [
     { label: "Rain", src: "/sounds/rain.mp3" },
@@ -8,6 +9,7 @@ const musicLibrary = [
 ];
 
 export default function FocusModeModal({ open, onClose, onOpen }) {
+    const location = useLocation();
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [selectedTrack, setSelectedTrack] = useState(musicLibrary[0]);
@@ -62,6 +64,20 @@ export default function FocusModeModal({ open, onClose, onOpen }) {
             window.removeEventListener('mouseup', handleMouseUp);
         };
     }, [isDragging, onOpen]);
+
+    React.useEffect(() => {
+        const token = localStorage.getItem("token");
+        const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+
+        if (!token || isAuthPage) {
+            setIsActive(false);
+            setSeconds(0);
+            if (audioRef.current) {
+                audioRef.current.pause();
+            }
+            setIsActiveMusic(false);
+        }
+    }, [location]);
 
     const handleWidgetClose = () => {
         setIsActive(false);

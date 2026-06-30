@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Registration"
@@ -6,6 +7,7 @@ import Library from "./pages/Library"
 import BookView from "./pages/BookView"
 import PublicFeed from "./pages/PublicFeed"
 import ErrorPage from "./pages/ErrorPage"
+import FocusModeModal from "./components/FocusModeModal"
 
 const ForgotPassword = () => <div>Forgot Password Page (Coming Soon)</div>
 
@@ -18,6 +20,19 @@ const ProtectedRoute = ({ children }) => {
 }
 
 const App = () => {
+    const [showFocusModal, setShowFocusModal] = useState(false)
+
+    useEffect(() => {
+        const handleOpen = () => setShowFocusModal(true)
+        const handleClose = () => setShowFocusModal(false)
+        window.addEventListener("open-focus-modal", handleOpen)
+        window.addEventListener("close-focus-modal", handleClose)
+        return () => {
+            window.removeEventListener("open-focus-modal", handleOpen)
+            window.removeEventListener("close-focus-modal", handleClose)
+        }
+    }, [])
+
     return (
         <Router>
             <Routes>
@@ -75,6 +90,11 @@ const App = () => {
                 />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
+            <FocusModeModal
+                open={showFocusModal}
+                onClose={() => setShowFocusModal(false)}
+                onOpen={() => setShowFocusModal(true)}
+            />
         </Router>
     )
 }
