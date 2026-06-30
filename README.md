@@ -18,7 +18,6 @@
 
 *   **Frontend**: React (Vite), React Router DOM, Axios, Lucide React, Vanilla CSS.
 *   **Backend**: Node.js, Express, MySQL (`mysql2` connection pool).
-*   **Deployment**: Vercel (Monorepo configuration).
 
 ---
 
@@ -69,12 +68,3 @@ Create a MySQL database and run your schema migrations to set up the `users`, `b
    ```bash
    npm run dev
    ```
-
----
-
-## Deployment on Vercel
-
-The project is configured for Vercel using a single-service monorepo deployment defined in the root [vercel.json](vercel.json):
-*   Vercel builds the React frontend and copies the build output into `backend/dist`.
-*   All incoming traffic is routed to the Express backend (`server.js`).
-*   The backend serves the API routes under `/api/*` and uses its static file server to serve the React SPA and handle client-side routing.
