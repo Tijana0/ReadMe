@@ -1,0 +1,109 @@
+/* 404 Error Page Styles */
+.error-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #617b72;
+    font-family: Optima, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.error-page-card {
+    background-color: #feffee;
+    padding: 3.5rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+}
+
+.error-page-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: #d79a1b;
+}
+
+.error-page-title {
+    font-size: 2.5rem;
+    color: #617b72;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.error-page-text {
+    color: #4a5451;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 0 2.5rem 0;
+}
+
+.error-page-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-page-btn-primary {
+    background-color: #617b72;
+    color: #feffee;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(97, 123, 114, 0.2);
+}
+
+.error-page-btn-primary:hover {
+    background-color: #4d625b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(97, 123, 114, 0.3);
+}
+
+.error-page-btn-primary:active {
+    transform: translateY(0);
+}
+
+.error-page-btn-secondary {
+    background-color: transparent;
+    color: #617b72;
+    border: 2px solid #617b72;
+    padding: 0.8rem 1.8rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+.error-page-btn-secondary:hover {
+    background-color: rgba(97, 123, 114, 0.05);
+    transform: translateY(-2px);
+}
+
+.error-page-btn-secondary:active {
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
