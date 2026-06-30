@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard"
 import Library from "./pages/Library"
 import BookView from "./pages/BookView"
 import PublicFeed from "./pages/PublicFeed"
+import Search from "./pages/Search"
 import ErrorPage from "./pages/ErrorPage"
 import FocusModeModal from "./components/FocusModeModal"
 
@@ -69,6 +70,22 @@ const App = () => {
                     element={
                         <ProtectedRoute>
                             <BookView />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/book/google/:googleId"
+                    element={
+                        <ProtectedRoute>
+                            <BookView />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/search"
+                    element={
+                        <ProtectedRoute>
+                            <Search />
                         </ProtectedRoute>
                     }
                 />

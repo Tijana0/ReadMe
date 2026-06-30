@@ -43,6 +43,12 @@ const NavMenu = ({ showLogo = true }) => {
                     My Library
                 </Link>
 
+                <span className="nav-separator">|</span>
+
+                <Link to="/search" className={`nav-link ${isActive("search") ? "active" : ""}`}>
+                    Search
+                </Link>
+
                 <button onClick={handleLogout} className="logout-btn">
                     Logout
                 </button>

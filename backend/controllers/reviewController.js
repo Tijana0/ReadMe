@@ -206,6 +206,29 @@ const getBookRating = async (req, res) => {
     }
 }
 
+const getReviewsByGoogleBook = async (req, res) => {
+    try {
+        const { googleId } = req.params
+        console.log("Getting reviews for Google book ID:", googleId)
+        const reviews = await Review.findByGoogleId(googleId)
+        res.json(reviews)
+    } catch (error) {
+        console.error("Error fetching reviews by Google book ID:", error)
+        res.status(500).json({ error: "Failed to fetch reviews" })
+    }
+}
+
+const getGoogleBookRating = async (req, res) => {
+    try {
+        const { googleId } = req.params
+        const ratingStats = await Review.getAverageRatingByGoogleId(googleId)
+        res.json(ratingStats)
+    } catch (error) {
+        console.error("Error fetching Google book rating:", error)
+        res.status(500).json({ error: "Failed to fetch rating" })
+    }
+}
+
 module.exports = {
     getReviewsByBook,
     getUserReviews,
@@ -213,4 +236,6 @@ module.exports = {
     updateReview,
     deleteReview,
     getBookRating,
+    getReviewsByGoogleBook,
+    getGoogleBookRating,
 }
