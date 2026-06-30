@@ -1,5 +1,7 @@
 .book-detail-container {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(to right, #feffee 50%, #617b72 50%);
     font-family: Optima, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -66,7 +68,7 @@
 
 .book-detail-content {
     display: flex;
-    min-height: calc(100vh - 200px);
+    flex: 1;
 }
 
 .book-detail-left {
