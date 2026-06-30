@@ -1,4 +1,4 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "../styles/light-nav-menu.css";
 
@@ -24,17 +24,17 @@ const LightNavMenu = ({ showLogo = true }) => {
             )}
 
             <nav className="nav-menu">
-                <a href="/dashboard" className={`nav-link-light ${isActive('dashboard') ? 'active' : ''}`}>
+                <Link to="/dashboard" className={`nav-link-light ${isActive('dashboard') ? 'active' : ''}`}>
                     Dashboard
-                </a>
+                </Link>
                 <span className="nav-separator-light">|</span>
-                <a href="/public-feed" className={`nav-link-light ${isActive('public-feed') ? 'active' : ''}`}>
+                <Link to="/public-feed" className={`nav-link-light ${isActive('public-feed') ? 'active' : ''}`}>
                     Public Feed
-                </a>
+                </Link>
                 <span className="nav-separator-light">|</span>
-                <a href="/library" className={`nav-link-light ${isActive('library') ? 'active' : ''}`}>
+                <Link to="/library" className={`nav-link-light ${isActive('library') ? 'active' : ''}`}>
                     My Library
-                </a>
+                </Link>
                 <button onClick={handleLogout} className="logout-btn-light">
                     Logout
                 </button>

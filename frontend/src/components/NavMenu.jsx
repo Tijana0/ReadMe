@@ -1,6 +1,6 @@
 "use client"
 
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation, Link } from "react-router-dom"
 import logo from "../assets/logo.png"
 
 const NavMenu = ({ showLogo = true }) => {
@@ -27,21 +27,21 @@ const NavMenu = ({ showLogo = true }) => {
             )}
 
             <nav className="nav-menu">
-                <a href="dashboard" className={`nav-link ${isActive("dashboard") ? "active" : ""}`}>
+                <Link to="/dashboard" className={`nav-link ${isActive("dashboard") ? "active" : ""}`}>
                     Dashboard
-                </a>
+                </Link>
 
                 <span className="nav-separator">|</span>
 
-                <a href="public-feed" className={`nav-link ${isActive("public-feed") ? "active" : ""}`}>
+                <Link to="/public-feed" className={`nav-link ${isActive("public-feed") ? "active" : ""}`}>
                     Public Feed
-                </a>
+                </Link>
 
                 <span className="nav-separator">|</span>
 
-                <a href="library" className={`nav-link ${isActive("library") ? "active" : ""}`}>
+                <Link to="/library" className={`nav-link ${isActive("library") ? "active" : ""}`}>
                     My Library
-                </a>
+                </Link>
 
                 <button onClick={handleLogout} className="logout-btn">
                     Logout
