@@ -59,7 +59,7 @@ const BookView = () => {
             // Transform reviews to match original format
             const transformedReviews = response.data.map((review) => ({
                 id: review.id,
-                user: review.email || review.username || "Anonymous",
+                user: review.name || review.email || review.username || "Anonymous",
                 comment: review.comment,
                 rating: review.rating,
                 created_at: review.created_at,
