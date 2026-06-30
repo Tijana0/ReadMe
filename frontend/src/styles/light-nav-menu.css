@@ -1,0 +1,52 @@
+/* Light Navigation Menu Styles */
+.nav-link-light {
+    color: #FEFFEE;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link-light:hover {
+    color: #ffffff;
+}
+
+.nav-link-light.active {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.nav-separator-light {
+    color: #FEFFEE;
+    margin: 0 1rem;
+}
+
+.logout-btn-light {
+    background: none;
+    border: none;
+    color: #FEFFEE;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.logout-btn-light:hover {
+    color: #ffffff;
+}
+
+.dashboard-header {
+    background: none;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+} 

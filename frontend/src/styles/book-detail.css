@@ -1,0 +1,660 @@
+.book-detail-container {
+    min-height: 100vh;
+    background: linear-gradient(to right, #feffee 50%, #617b72 50%);
+    font-family: Optima, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.book-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: transparent;
+}
+
+.book-detail-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.book-detail-logo {
+    height: 2rem;
+    width: auto;
+}
+
+.book-detail-logo-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #617b72;
+}
+
+.book-detail-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #feffee;
+}
+
+.book-detail-nav-link {
+    color: #feffee;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.book-detail-nav-link:hover {
+    opacity: 0.8;
+}
+
+.book-detail-nav-separator {
+    color: #feffee;
+}
+
+.book-detail-logout-btn {
+    color: #feffee;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
+}
+
+.book-detail-logout-btn:hover {
+    opacity: 0.8;
+}
+
+.book-detail-content {
+    display: flex;
+    min-height: calc(100vh - 200px);
+}
+
+.book-detail-left {
+    flex: 1;
+    padding: 2rem 3rem;
+    background-color: #feffee;
+}
+
+.book-detail-right {
+    flex: 1;
+    padding: 2rem 3rem;
+    background-color: #617b72;
+}
+
+.book-detail-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.book-detail-author {
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.book-detail-section {
+    margin-bottom: 24px;
+}
+
+.book-detail-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+.book-detail-genres {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.book-detail-genre-tag {
+    color: #617b72;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    background-color: rgba(97, 123, 114, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+}
+
+.book-detail-adaptations {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.book-detail-adaptation {
+    color: #000;
+    margin: 0;
+}
+
+.book-detail-status {
+    margin-bottom: 1.5rem;
+}
+
+.book-detail-status-badge {
+    background-color: transparent;
+    color: #617b72;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    display: inline-block;
+    border: 2px solid #617b72;
+}
+
+.book-detail-progress {
+    margin-bottom: 1.5rem;
+}
+
+.book-detail-progress-text {
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.book-detail-description {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-top: 8px;
+}
+
+.book-detail-update-btn {
+    background-color: #617b72;
+    color: #feffee;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-detail-update-btn:hover {
+    background-color: rgba(97, 123, 114, 0.9);
+}
+
+.book-detail-cover-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-detail-cover {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1.5rem;
+}
+
+.book-detail-rating-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.book-detail-average-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.book-detail-rating {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.star {
+    color: #ccc;
+    margin: 0 0.2rem;
+    cursor: pointer;
+}
+
+.star.filled {
+    color: #808080;
+}
+
+.book-detail-star {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    transition: color 0.2s ease;
+}
+
+.book-detail-star.filled {
+    color: #d79a1b;
+}
+
+.book-detail-star.interactive {
+    cursor: pointer;
+}
+
+.book-detail-star.interactive:hover {
+    color: #d79a1b;
+}
+
+.book-detail-rating-text {
+    color: #feffee;
+    font-size: 0.9rem;
+}
+
+.book-detail-reviews-section {
+    width: 100%;
+}
+
+.book-detail-reviews-title {
+    color: #feffee;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.book-detail-reviews-list {
+    margin-bottom: 2rem;
+}
+
+.book-detail-review {
+    margin-bottom: 1.5rem;
+    color: #feffee;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.book-detail-review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.book-detail-review-user {
+    font-weight: 600;
+    color: #feffee;
+}
+
+.book-detail-review-rating {
+    display: flex;
+    gap: 0.1rem;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.book-detail-review-rating .book-detail-star {
+    font-size: 1rem;
+}
+
+.book-detail-review-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.book-detail-review-text {
+    font-style: italic;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.book-detail-review-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.book-detail-review-action-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #feffee;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.book-detail-review-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.book-detail-review-action-btn.delete {
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
+
+.book-detail-review-action-btn.delete:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+.book-detail-no-reviews {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-style: italic;
+    margin: 2rem 0;
+}
+
+.book-detail-loading-reviews {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.book-detail-see-more {
+    background: none;
+    border: none;
+    color: #feffee;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 4px 0;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.book-detail-see-more:hover {
+    text-decoration: underline;
+}
+
+.book-detail-add-review {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.book-detail-add-review-title {
+    color: #feffee;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.book-detail-review-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: #feffee;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.book-detail-review-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.book-detail-review-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.book-detail-review-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.book-detail-submit-review {
+    background-color: #feffee;
+    color: #617b72;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.book-detail-submit-review:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.book-detail-submit-review:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.book-detail-cancel-review {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #feffee;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-detail-cancel-review:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.book-detail-footer {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    background-color: #feffee;
+}
+
+.book-detail-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 1.5rem;
+    color: #617b72;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.book-detail-loading button {
+    background-color: #617b72;
+    color: #feffee;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .book-detail-container {
+        background: #feffee;
+    }
+
+    .book-detail-content {
+        flex-direction: column;
+    }
+
+    .book-detail-right {
+        background-color: #617b72;
+    }
+
+    .book-detail-nav {
+        color: #000;
+    }
+
+    .book-detail-nav-link {
+        color: #000;
+    }
+
+    .book-detail-nav-separator {
+        color: #000;
+    }
+
+    .book-detail-logout-btn {
+        color: #000;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-detail-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .book-detail-left,
+    .book-detail-right {
+        padding: 1rem 2rem;
+    }
+
+    .book-detail-title {
+        font-size: 2rem;
+    }
+
+    .book-detail-cover {
+        width: 12rem;
+        height: 18rem;
+    }
+
+    .book-detail-review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .book-detail-review-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-detail-left,
+    .book-detail-right {
+        padding: 1rem;
+    }
+
+    .book-detail-genres {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .book-detail-cover {
+        width: 10rem;
+        height: 15rem;
+    }
+
+    .book-detail-review-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.book-detail-see-more-btn {
+    background: none;
+    border: none;
+    color: rgba(254, 255, 238, 0.7);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+.book-detail-see-more-btn:hover {
+    color: #000000;
+}
+
+.book-detail-add-review-section {
+    width: 100%;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(254, 255, 238, 0.2);
+}
+
+.book-detail-add-review-title {
+    color: #feffee;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.book-detail-add-review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.book-detail-add-review-textarea {
+    background-color: rgba(254, 255, 238, 0.1);
+    color: #feffee;
+    border: 1px solid rgba(254, 255, 238, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    min-height: 100px;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.book-detail-add-review-textarea::placeholder {
+    color: rgba(254, 255, 238, 0.5);
+}
+
+.book-detail-add-review-textarea:focus {
+    outline: none;
+    border-color: #d79a1b;
+    background-color: rgba(254, 255, 238, 0.15);
+}
+
+.book-detail-add-review-btn {
+    background-color: #feffee;
+    color: #617b72;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+}
+
+.book-detail-add-review-btn:hover {
+    background-color: #d79a1b;
+    color: #feffee;
+}
+
+.book-detail-reviews-count {
+    color: #feffee;
+}
+
+.read-more-btn {
+    background: none;
+    border: none;
+    color: #617b72;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 4px 0;
+    margin-top: 1px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.read-more-btn:hover {
+    text-decoration: underline;
+}
+
+.book-detail-rating-summary {
+    margin-left: 0;
+    margin-top: 4px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    display: block;
+}

@@ -1,0 +1,146 @@
+* {
+    font-family: Optima, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.auth-container {
+    background: #feffee;
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+h1 {
+    color: #617b72;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 50px;
+}
+
+.rm-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 2.25rem;
+    width: auto;
+    object-fit: contain;
+}
+
+.main-btn {
+    font-size: 18px;
+    border-radius: 20px;
+    margin-top: 15px;
+    background-color: #617b72;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.main-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.second-btn {
+    font-size: 18px;
+    color: #617b72;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.second-btn:hover {
+    background-color: #e0e0e0;
+    color: #393939;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 15vh;
+}
+
+.form-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.info-input {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+.info-input label {
+    min-width: 100px;
+    flex-shrink: 0;
+}
+
+.line-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
+    padding: 8px 0;
+    outline: none;
+    width: 250px;
+    font-size: 18px;
+    color: #000;
+}
+
+.line-input:focus {
+    border-bottom: 2px solid #617b72;
+}
+
+.error-message {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid #ff0000;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    color: #d32f2f;
+}
+
+@media (max-width: 480px) {
+    .info-input {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .info-input label {
+        min-width: auto;
+        margin-bottom: 5px;
+    }
+    .line-input {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
