@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 
 const musicLibrary = [
-    { label: "Rain", src: "/sounds/whitenoise.mp3" },
-    { label: "Cafe", src: "/sounds/whitenoise.mp3" },
-    { label: "Forest", src: "/sounds/whitenoise.mp3" },
+    { label: "Rain", src: "/sounds/rain.mp3" },
+    { label: "Cafe", src: "/sounds/cafe.mp3" },
+    { label: "Forest", src: "/sounds/forest.mp3" },
     { label: "White Noise", src: "/sounds/whitenoise.mp3" }
 ];
 
