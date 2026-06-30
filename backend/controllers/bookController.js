@@ -6,6 +6,19 @@ const Review = require("../models/reviewModel")
 const GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes"
 const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY || "" // Add this to your .env file
 
+const getHighResCoverUrl = (url) => {
+    if (!url) return null
+    // Replace zoom=1 or zoom=5 with zoom=2
+    let highResUrl = url.replace(/zoom=[15]/, "zoom=2")
+    // Remove the edge=curl parameter
+    highResUrl = highResUrl.replace(/&edge=curl/, "")
+    // Ensure https
+    if (highResUrl.startsWith("http://")) {
+        highResUrl = highResUrl.replace("http://", "https://")
+    }
+    return highResUrl
+}
+
 const getAllBooks = async (req, res) => {
     try {
         console.log("getAllBooks called for user:", req.user.userId)
@@ -391,7 +404,7 @@ const searchGoogleBooks = async (query) => {
                     ? volumeInfo.authors.join(", ")
                     : volumeInfo.authors || "Unknown Author",
                 description: volumeInfo.description || "No description available",
-                thumbnail: imageLinks.thumbnail || imageLinks.smallThumbnail || null,
+                thumbnail: getHighResCoverUrl(imageLinks.thumbnail || imageLinks.smallThumbnail),
                 publishedDate: volumeInfo.publishedDate || null,
                 pageCount: volumeInfo.pageCount || null,
                 categories: volumeInfo.categories || [],
@@ -533,7 +546,7 @@ const getGoogleBookById = async (req, res) => {
             author: Array.isArray(volumeInfo.authors)
                 ? volumeInfo.authors.join(", ")
                 : volumeInfo.authors || "Unknown Author",
-            cover_url: imageLinks.thumbnail || imageLinks.smallThumbnail || null,
+            cover_url: getHighResCoverUrl(imageLinks.thumbnail || imageLinks.smallThumbnail),
             description: volumeInfo.description || "No description available",
             genre: volumeInfo.categories && volumeInfo.categories.length > 0 ? volumeInfo.categories[0] : null,
             status: "Not in Library",
