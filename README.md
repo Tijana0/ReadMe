@@ -1,70 +1,150 @@
 # ReadMe
 
-**ReadMe** is a beautiful, modern web application designed for book lovers to track their reading journeys, manage their personal libraries, and share reviews with a global community of readers.
+ReadMe is a full-stack reading tracker for managing a personal library, tracking reading progress, discovering books, and sharing reviews.
 
----
+The project combines a React frontend with an Express REST API and a MySQL database. It also integrates the Google Books API for book discovery and metadata.
 
 ## Features
 
-*   **Personal Library**: Add and organize books into categories: *Want to Read*, *Currently Reading*, and *Read*.
-*   **Progress Tracking**: Update your reading progress (pages read) and mark books as completed.
-*   **Global Reviews & Ratings**: Write, edit, and delete reviews. Reviews are shared globally across all users who have the same book (linked by Google Book ID or Title + Author).
-*   **Book Search**: Search the Google Books API to discover new titles, view their global ratings/reviews, and add them directly to your library.
-*   **Premium Aesthetics**: A fully responsive, dark green and cream literary-themed interface with smooth micro-animations and a custom "Lost in the Stacks" 404 page.
+- Organize books into **Want to Read**, **Currently Reading**, and **Read**
+- Track reading progress by page count
+- Mark favorite books
+- Search for books through the Google Books API
+- Add books from search results to a personal library
+- Write, edit, and delete reviews
+- View ratings and reviews associated with the same book
+- Use protected user accounts with token-based authentication
+- Explore dashboard and reading progress views
+- Responsive interface with a custom 404 page
 
----
+## Tech stack
 
-## Tech Stack
+### Frontend
 
-*   **Frontend**: React (Vite), React Router DOM, Axios, Lucide React, Vanilla CSS.
-*   **Backend**: Node.js, Express, MySQL (`mysql2` connection pool).
+- React 19
+- Vite
+- React Router
+- Axios
+- Vanilla CSS
+- Lucide React
 
----
+### Backend
 
-## Getting Started
+- Node.js
+- Express
+- MySQL with `mysql2`
+- JSON Web Tokens
+- bcrypt
+- Google Books API
+
+## Architecture
+
+```text
+React frontend
+      |
+      | HTTP / JSON
+      v
+Express REST API
+      |
+      +------> Google Books API
+      |
+      v
+MySQL database
+```
+
+The frontend communicates with API routes for authentication, books, users, and reviews. Protected backend routes validate bearer tokens before accessing user-specific data.
+
+Passwords are hashed with bcrypt, and authenticated sessions use JSON Web Tokens.
+
+## Project structure
+
+```text
+.
+├── frontend/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       └── styles/
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── app.js
+│   └── server.js
+└── vercel.json
+```
+
+## Local setup
 
 ### Prerequisites
-*   [Node.js](https://nodejs.org/) (v18+ recommended)
-*   [MySQL Server](https://www.mysql.com/)
 
-### 1. Database Setup
-Create a MySQL database and run your schema migrations to set up the `users`, `books`, and `reviews` tables.
+- Node.js
+- MySQL
 
-### 2. Backend Setup
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the `backend` directory with the following variables:
-   ```env
-   PORT=3001
-   DB_HOST=your-database-host
-   DB_PORT=your-database-port
-   DB_USER=your-database-username
-   DB_PASSWORD=your-database-password
-   DB_NAME=your-database-name
-   JWT_SECRET=your-jwt-secret-key
-   GOOGLE_BOOKS_API_KEY=your-google-books-api-key (optional)
-   ```
-4. Start the server:
-   ```bash
-   node server.js
-   ```
+### 1. Clone the repository
 
-### 3. Frontend Setup
-1. Navigate to the frontend directory:
-   ```bash
-   cd ../frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite development server:
-   ```bash
-   npm run dev
-   ```
+```bash
+git clone https://github.com/Tijana0/ReadMe.git
+cd ReadMe
+```
+
+### 2. Configure the backend
+
+Create `backend/.env`:
+
+```env
+DB_HOST=your-database-host
+DB_PORT=3306
+DB_USER=your-database-user
+DB_PASSWORD=your-database-password
+DB_NAME=your-database-name
+
+ACCESS_TOKEN_SECRET=replace-with-a-long-random-secret
+GOOGLE_BOOKS_API_KEY=optional-google-books-api-key
+PORT=3001
+```
+
+The `.env` file is ignored by Git and should never be committed.
+
+The project expects a compatible MySQL schema for its users, books, reviews, and reading data. SQL migration files are not currently included in this repository, so a local database must be prepared separately.
+
+### 3. Install and start the backend
+
+```bash
+cd backend
+npm install
+node server.js
+```
+
+### 4. Install and start the frontend
+
+In a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Vite will print the local frontend address in the terminal.
+
+## API overview
+
+The backend is organized around these route groups:
+
+- `/api/auth` for registration, login, and token validation
+- `/api/books` for library management, search, favorites, and dashboard data
+- `/api/users` for user-related data
+- `/api/reviews` for reviews and ratings
+
+## Security notes
+
+- Passwords are hashed with bcrypt.
+- Protected routes require a bearer token.
+- Database credentials and authentication secrets are loaded from environment variables.
+- Environment files are excluded through `.gitignore`.
+
+## Status
+
+This project is part of my software development portfolio and remains a useful example of full-stack application structure, API integration, authentication, and relational data handling.
