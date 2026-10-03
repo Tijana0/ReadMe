@@ -1,12 +1,20 @@
 require("dotenv").config()
 const mysql = require("mysql2/promise")
 
+const requiredEnv = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME"]
+
+for (const key of requiredEnv) {
+    if (!process.env[key]) {
+        throw new Error(`${key} environment variable is required`)
+    }
+}
+
 const config = {
-    host: "atp.fhstp.ac.at",
-    port: 8007,
-    user: "cc241005",
-    password: "Vf5!Aq1-Rw2-",
-    database: "cc241005",
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT || 3306),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
 }
 
 // Create connection pool
