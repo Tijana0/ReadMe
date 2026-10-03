@@ -32,8 +32,7 @@ const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"]
     const token = authHeader && authHeader.split(" ")[1]
 
-    console.log("Auth header:", authHeader)
-    console.log("Extracted token:", token ? "Present" : "Missing")
+    console.log("Authentication token:", token ? "Present" : "Missing")
 
     if (!token) {
         console.log("No token provided")
